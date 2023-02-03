@@ -1,0 +1,19 @@
+version: '2'
+sql:
+  - schema: 'database/migrations'
+    queries: 'database/queries'
+    engine: 'postgresql'
+    gen:
+      go:
+        package: 'postgres'
+        out: 'internal/adapters/postgres'
+        sql_package: 'pgx/v5'
+        emit_interface: true
+        emit_prepared_queries: true
+        emit_result_struct_pointers: true
+        emit_params_struct_pointers: true
+        emit_enum_valid_method: true
+        emit_all_enum_values: true
+        overrides:
+          - db_type: "uuid"
+            go_type: "github.com/google/uuid.UUID"
