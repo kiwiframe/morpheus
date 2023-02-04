@@ -2,14 +2,15 @@
 // versions:
 //   sqlc v1.16.0
 
-package postgres
+package sqlc
 
 import (
+	"database/sql"
 	"database/sql/driver"
 	"fmt"
+	"time"
 
 	"github.com/google/uuid"
-	"github.com/jackc/pgx/v5/pgtype"
 )
 
 type UsersPrivilege string
@@ -139,12 +140,12 @@ type UsersAccount struct {
 	Username          string
 	Email             string
 	HashedPassword    string
-	CreatedAt         pgtype.Timestamptz
-	UpdatedAt         pgtype.Timestamptz
-	LastLoggedIn      pgtype.Timestamptz
+	CreatedAt         time.Time
+	UpdatedAt         time.Time
+	LastLoggedIn      sql.NullTime
 	PrivilegeLevel    UsersPrivilege
 	RestrictionLevel  UsersRestriction
-	RestrictionExpiry pgtype.Timestamptz
+	RestrictionExpiry sql.NullTime
 	Verified          bool
 }
 
@@ -152,5 +153,5 @@ type UsersVerification struct {
 	ID        uuid.UUID
 	UserID    uuid.UUID
 	Token     string
-	ExpiresAt pgtype.Timestamptz
+	ExpiresAt time.Time
 }

@@ -3,7 +3,7 @@
 //   sqlc v1.16.0
 // source: accounts.sql
 
-package postgres
+package sqlc
 
 import (
 	"context"
